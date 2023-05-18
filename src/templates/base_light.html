@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ru" {% block schemapage %}{% endblock %}>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="author" content="Илья Зеленчук">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NGT2J3Z');</script>
+<!-- End Google Tag Manager -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='/assets/img/favicon.png') }}" type="image/png">
+    <!-- Quick CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/quick-website.css') }}" id="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/main.css') }}" id="stylesheet">
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/libs/animate.css/animate.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/libs/@fortawesome/fontawesome-free/css/all.min.css') }} ">
+    <!-- Markdowm -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/simplemde.min.css') }}">
+    {{ simplemde.js }}
+
+    {% block head_links %}
+    {% endblock %}
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGT2J3Z"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- SPbU topbar (noscript) -->
+<script type="text/javascript"> (function(){ var sc = document.createElement('script'); sc.type = 'text/javascript'; sc.async = true; sc.src = '//topbar.spbu.ru/loader.js'; var ls = document.getElementsByTagName('script')[0]; ls.parentNode.insertBefore(sc, ls); })(); </script>
+<!-- End SPbU topbar (noscript) -->
+
+<!-- Header -->
+<header class="header">
+    <div class="top">
+        <div class="content">
+            <div class="top-wrapper">
+                <a href="/" class="top-logotype">
+                    <svg class="top-logotype-logo">
+                        <use xlink:href="/assets/img/sprite.svg#logo"></use>
+                    </svg>
+                </a>
+                <form class="top-search js_search_form" action="/search/index" method="get">
+                    <input type="text" class="top-search-field js_search_input" placeholder="Поиск" name="title" autocomplete="off">
+                    <button class="top-search-button">
+                        <svg class="top-search-icon">
+                            <use xlink:href="/assets/img/sprite.svg#ic-0"></use>
+                        </svg>
+                    </button>
+                    <div class="top-search-dropdown js_get_hints_container"></div>
+                </form>
+            </div>
+            <div class="top-wrapper">
+                <div class="top-contacts">
+                    <a href="tel:+73462206940" class="top-contacts-block">
+                        <svg class="top-contacts-block-icon">
+                            <use xlink:href="/assets/img/sprite.svg#ic-1"></use>
+                        </svg>
+                        <div class="top-contacts-block-text">+7 (3462) 206-940</div>
+                    </a>
+                    <a href="/site/contacts" class="top-contacts-block">
+                        <svg class="top-contacts-block-icon">
+                            <use xlink:href="/assets/img/sprite.svg#ic-2"></use>
+                        </svg>
+                        <div class="top-contacts-block-text">ул. Маяковского, 41</div>
+                    </a>
+                    <a href="mailto:surpk@surpk.ru" class="top-contacts-block">
+                        <svg class="top-contacts-block-icon">
+                            <use xlink:href="/assets/img/sprite.svg#ic-3"></use>
+                        </svg>
+                        <div class="top-contacts-block-text">surpk@surpk.ru</div>
+                    </a>
+                </div>
+                <div class="top-social">
+                    <!-- <a class="top-social-icon">
+                        <svg class="icon fb">
+                            <use xlink:href="/assets/img/sprite.svg#ic-4"></use>
+                        </svg>
+                    </a>
+                    <a class="top-social-icon">
+                        <svg class="icon vk">
+                            <use xlink:href="/assets/img/sprite.svg#ic-5"></use>
+                        </svg>
+                    </a> -->
+<!--                    <a href="http://insagram.com/spk.prof" class="top-social-icon" target="_blank">-->
+<!--                        <svg class="icon inst">-->
+<!--                            <use xlink:href="/assets/img/sprite.svg#ic-6"></use>-->
+<!--                        </svg>-->
+<!--                    </a>-->
+                </div>
+                <div class="top-use">
+                    <a href="{{ url_for('user_profile') }}" class="top-user default active bvi-link" id="bvi-panel-close" title="Обычная версия сайта">
+                        <svg class="icon">
+                            <use xlink:href="/assets/img/sprite.svg#ic-7"></use>
+                        </svg>
+                    </a>
+                    <div class="top-user zoom bvi-open" title="Версия сайта для слабовидящих">
+                        <svg class="icon">
+                            <use xlink:href="/assets/img/sprite.svg#ic-8"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom js-dropdown-container">
+        <div class="content">
+            <nav class="bottom-navigation">
+                <div class="bottom-navigation-hamburger">
+                    <div class="bottom-navigation-hamburger-wrapper js-toggle-dropdown">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="bottom-navigation-hamburger-wrapper js-toggle-menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="bottom-navigation-dropdown js-dropdown">
+                        <div class="bottom-navigation-dropdown-row">
+                            <div class="bottom-navigation-dropdown-column">
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/education/index" class="bottom-navigation-dropdown-title">Сведения об образовательной организации </a>
+                                </div>
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/additional/index" class="bottom-navigation-dropdown-title">Дополнительное образование </a>
+                                                                                                                                            </div>
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/site/procurement" class="bottom-navigation-dropdown-title">Закупки</a>
+                                </div>
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/noko/index" class="bottom-navigation-dropdown-title">НОКО</a>
+                                </div>
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/site/information-about-the-heads-income" class="bottom-navigation-dropdown-title">Сведения о доходах руководителя</a>
+                                </div>
+                            </div>
+                            <div class="bottom-navigation-dropdown-column">
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/rkc/index" class="bottom-navigation-dropdown-title">Региональный координационный центр</a>
+                                    <a href="/rkc/view?page=regional_championships_of_khmao" class="bottom-navigation-dropdown-semititle">Региональные чемпионаты ХМАО-Югры</a>
+                                    <a href="/rkc/view?page=qualifying_competition" class="bottom-navigation-dropdown-semititle">Отборочные соревнования </a>
+                                    <a href="/rkc/view?page=qualifying_competitions_on_the_territory_of_khmao_yugra" class="bottom-navigation-dropdown-semititle">Отборочные соревнования на территории ХМАО-Югры</a>
+                                    <a href="/rkc/view?page=national_championships" class="bottom-navigation-dropdown-semititle">Национальные чемпионаты</a>
+                                    <a href="/rkc/view?page=demo_exam" class="bottom-navigation-dropdown-semititle">Демонстрационный экзамен</a>
+                                    <a href="/rkc/view?page=training_according_to_the_programs_of_the_hrv_academy" class="bottom-navigation-dropdown-semititle">Обучение по программам Академии ВСР</a>
+                                    <a href="/rkc/view?page=project_ticket_to_the_future" class="bottom-navigation-dropdown-semititle">Проект «Билет в Будущее» на территории ХМАО-Югры</a>
+                                    <a href="/rkc/documents?page=archive_rkc" class="bottom-navigation-dropdown-semititle">Архив РКЦ</a>
+                                </div>
+                            </div>
+                            <div class="bottom-navigation-dropdown-column">
+                                <div class="bottom-navigation-dropdown-block">
+                                    <a href="/subdivision/index?id=6" class="bottom-navigation-dropdown-title">Многофункциональный центр прикладных квалификаций</a>
+                                    <a href="/schedule/view?id=6" class="bottom-navigation-dropdown-semititle">Расписание</a>
+                                    <a href="/subdivision/news?id=6" class="bottom-navigation-dropdown-semititle">Медиа-центр</a>
+                                    <a href="/subdivision/events?id=6" class="bottom-navigation-dropdown-semititle">Мероприятия</a>
+                                    <a href="/social-partnership/index" class="bottom-navigation-dropdown-semititle">Трудоустройство</a>
+                                </div>
+                            </div>
+                            <div class="bottom-navigation-dropdown-column">
+                                <div class="bottom-navigation-dropdown-block">
+                                    <div class="bottom-navigation-dropdown-title no-link">Сервисы</div>
+                                                                                                                                                                        <a href="https://learn.surpk.ru/cab/wc/#/auth" class="bottom-navigation-dropdown-semititle" target="_blank">ЛИЧНЫЙ КАБИНЕТ </a>
+                                                                                                                                                                                <a href="https://mail.surpk.ru/" class="bottom-navigation-dropdown-semititle" target="_blank">Корпоративная почта</a>
+                                                                                                                                                                                <a href="https://schedule.surpk.ru/schedule/" class="bottom-navigation-dropdown-semititle" target="_blank">Расписание занятий </a>
+                                                                                                                                                                                <a href="https://surpk.ru/service/digital-library" class="bottom-navigation-dropdown-semititle" target="_blank">Электронные ресурсы</a>
+                                                                                                                                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-mobile-menu js-mobile-menu">
+					<a href="/education/index" class="bottom-navigation-item mob-only">
+                        <span class="bottom-navigation-item-text">Сведения об образовательной организации</span>
+                    </a>
+                    <div class="bottom-navigation-item">
+                        <div class="bottom-navigation-item-text js-toggle-dropdown">Студенту</div>
+                        <div class="bottom-navigation-dropdown js-dropdown">
+                            <div class="bottom-navigation-dropdown-row">
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/advertisement/index" class="bottom-navigation-dropdown-title">Объявления</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/schedule/index" class="bottom-navigation-dropdown-title">Расписание занятий</a>
+                                                                                                                            <a href="/schedule/view?id=1" class="bottom-navigation-dropdown-semititle">СП-1</a>
+                                                                                    <a href="/schedule/view?id=3" class="bottom-navigation-dropdown-semititle">СП-2</a>
+                                                                                    <a href="/schedule/view?id=4" class="bottom-navigation-dropdown-semititle">СП-3</a>
+                                                                                    <a href="/schedule/view?id=5" class="bottom-navigation-dropdown-semititle">СП-4</a>
+                                                                                    <a href="/schedule/view?id=6" class="bottom-navigation-dropdown-semititle">МФЦПК</a>
+                                                                                    <a href="/schedule/view?id=8" class="bottom-navigation-dropdown-semititle"></a>
+                                                                            </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/distance/index" class="bottom-navigation-dropdown-title">Обучение с применением дистанционных образовательных технологий </a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/distance-learning" class="bottom-navigation-dropdown-title">Заочное обучение</a>
+<!--                                        <a class="bottom-navigation-dropdown-semititle">Документы</a>-->
+<!--                                        <a class="bottom-navigation-dropdown-semititle">Календарный учебный график</a>-->
+<!--                                        <a href="--><!--" class="bottom-navigation-dropdown-semititle">Расписание занятий</a>-->
+<!--                                        <a href="--><!--" class="bottom-navigation-dropdown-semititle">Контакты</a>-->
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/reception" class="bottom-navigation-dropdown-title">Обучение инвалидов и лиц с ОВЗ</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/ege" class="bottom-navigation-dropdown-title">ЕГЭ</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/gia" class="bottom-navigation-dropdown-title">Государственная итоговая аттестация</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/student/list-of-curators-of-study-groups" class="bottom-navigation-dropdown-title">Список кураторов учебных групп</a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/demo-exam/index" class="bottom-navigation-dropdown-title">Демонстрационный экзамен</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/rule" class="bottom-navigation-dropdown-title">Правила внутреннего распорядка для обучающихся колледжа</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/preventive" class="bottom-navigation-dropdown-title">Профилактическая работа</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/activity/autonomy" class="bottom-navigation-dropdown-title">Студенческое самоуправление</a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/activity/index" class="bottom-navigation-dropdown-title">Внеучебная деятельность</a>
+                                        <a href="/activity/mugs" class="bottom-navigation-dropdown-semititle">Кружки, секции</a>
+                                        <a href="/activity/autonomy" class="bottom-navigation-dropdown-semititle">Студенческое самоуправление</a>
+                                        <a href="/activity/sport" class="bottom-navigation-dropdown-semititle">Спортивная деятельность</a>
+                                        <a href="/activity/events" class="bottom-navigation-dropdown-semititle">Мероприятия</a>
+                                        <a href="/activity/gallery" class="bottom-navigation-dropdown-semititle">Фото-видео-галерея </a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/hostel" class="bottom-navigation-dropdown-title">Общежитие</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/med" class="bottom-navigation-dropdown-title">Режим работы медицинского кабинета</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-navigation-item">
+                        <div class="bottom-navigation-item-text js-toggle-dropdown">Абитуриенту</div>
+                        <div class="bottom-navigation-dropdown js-dropdown">
+                        <div class="bottom-navigation-dropdown-row">
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/index" class="bottom-navigation-dropdown-title">Приёмная комиссия</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/specialties" class="bottom-navigation-dropdown-title">Специальности и профессии</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/hostel" class="bottom-navigation-dropdown-title">Информация об общежитии</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/announcements-for-applicants" class="bottom-navigation-dropdown-title">Объявления для абитуриентов</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/statement?page_block=mode_of_operation_of_the_selection_committee" class="bottom-navigation-dropdown-title">Режим работы приемной комиссии</a>
+                                    </div>
+<!--                                    <div class="bottom-navigation-dropdown-block">-->
+<!--                                        <a href="--><!--" class="bottom-navigation-dropdown-title">--><!--</a>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/cours" class="bottom-navigation-dropdown-title">Подготовительные курсы для поступающих</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/questions" class="bottom-navigation-dropdown-title">Часто задаваемые вопросы</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/price" class="bottom-navigation-dropdown-title">Стоимость образовательных услуг</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/statement?page_block=extramural_studies" class="bottom-navigation-dropdown-title">Заочная форма обучения</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/enrollee/selection-committee?id=35" class="bottom-navigation-dropdown-title">Профессиональное обучение для лиц с ОВЗ</a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <div class="bottom-navigation-dropdown-title no-link" style="font-weight: 700;font-size: 20px;">
+                                            Ход приемной кампании - 2023                                        </div>
+                                    </div>
+                                    <style>
+                                        .css_banner_title {
+                                            background-image: none;
+                                            background-color: #3e6ab0;
+                                            min-height: 0;
+                                            padding: 10px 26px 10px 26px;
+                                            margin-bottom: 5px
+                                        };
+                                    </style>
+                                    <div class="bottom-navigation-dropdown-block" style="margin-top: 10px">
+                                        <a href="/enrollee/statement?page_block=information_on_the_number_of_applications_submitted" class="bottom-navigation-dropdown-banner-title">
+                                            <div class="css_banner_title">
+                                                Информация о количестве поданных заявлений
+                                            </div>
+                                        </a>
+                                        <a href="/enrollee/rating-of-applicants" class="bottom-navigation-dropdown-banner-title">
+                                            <div class="css_banner_title">
+                                                Рейтинг абитуриентов
+                                            </div>
+                                        </a>
+                                        <a href="/enrollee/statement?page_block=entrance_test_results" class="bottom-navigation-dropdown-banner-title">
+                                            <div class="css_banner_title">
+                                                Результаты вступительных испытаний
+                                            </div>
+                                        </a>
+                                        <a href="/enrollee/lists" class="bottom-navigation-dropdown-banner-title">
+                                            <div class="css_banner_title">
+                                                Списки абитуриентов, рекомендованных к зачислению
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <div class="bottom-navigation-dropdown-banner">
+                                            <div class="bottom-navigation-dropdown-banner-title">Дополнительное образование</div>
+                                            <div class="bottom-navigation-dropdown-banner-desc">Шанс получить квалификацию и стать специалистом в любой сфере. Мы предлагаем разнообразные программы для тех, кто хочет открыть для себя мир новых возможностей!</div>
+                                            <a href="/additional/index" class="bottom-navigation-dropdown-banner-link">
+                                                <span class="bottom-navigation-dropdown-banner-text">Подробнее</span>
+                                                <svg class="bottom-navigation-dropdown-banner-icon">
+                                                    <use xlink:href="/assets/img/sprite.svg#ic-9"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/additional/index" class="bottom-navigation-item">
+                        <span class="bottom-navigation-item-text">Дополнительное образование</span>
+                    </a>
+                    <a href="/subdivision/index?id=6" class="bottom-navigation-item">
+                        <span class="bottom-navigation-item-text">МФЦПК</span>
+                    </a>
+                    <a href="/rkc/index" class="bottom-navigation-item">
+                        <span class="bottom-navigation-item-text">РКЦ</span>
+                    </a>
+                    <a href="/schedule/index" class="bottom-navigation-item">
+                        <span class="bottom-navigation-item-text">Расписание</span>
+                    </a>
+                    <div class="bottom-navigation-item">
+                        <div class="bottom-navigation-item-text js-toggle-dropdown">О колледже</div>
+                        <div class="bottom-navigation-dropdown js-dropdown">
+                            <div class="bottom-navigation-dropdown-row">
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/history" class="bottom-navigation-dropdown-title">История колледжа</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/achievements" class="bottom-navigation-dropdown-title">Достижения</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/honor" class="bottom-navigation-dropdown-title">Книга почета</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/social-psychological-service/psychological" class="bottom-navigation-dropdown-title">Социально-психологическая служба</a>
+                                        <a href="/social-psychological-service/psychologist-to-student" class="bottom-navigation-dropdown-semititle">Психолог - студенту</a>
+                                        <a href="/social-psychological-service/psychologist-to-parent" class="bottom-navigation-dropdown-semititle">Психолог - родителю</a>
+                                        <a href="/social-psychological-service/psychologist-to-teacher" class="bottom-navigation-dropdown-semititle">Психолог - педагогу</a>
+                                        <a href="/social-psychological-service/social" class="bottom-navigation-dropdown-semititle">Социальная работа</a>
+                                        <a href="/social-psychological-service/mediation" class="bottom-navigation-dropdown-semititle">Служба медиации</a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <div class="bottom-navigation-dropdown-title no-link">Медиа-центр</div>
+                                        <a href="/news/index" class="bottom-navigation-dropdown-semititle">Новости</a>
+                                        <a href="/media-center/style" class="bottom-navigation-dropdown-semititle">Фирменный стиль колледжа</a>
+                                        <a href="/media-center/gallery" class="bottom-navigation-dropdown-semititle">Фото и видео галерея</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/methodical/index" class="bottom-navigation-dropdown-title">Методическая служба</a>
+                                        <a href="/site/composition" class="bottom-navigation-dropdown-semititle">Состав МО/ПМО</a>
+                                        <a href="/teacher/index" class="bottom-navigation-dropdown-semititle">Аттестация педагогических работников</a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/library/index" class="bottom-navigation-dropdown-title">Библиотека</a>
+                                        <a href="/library/bibliography" class="bottom-navigation-dropdown-semititle">Библиоафиша</a>
+                                        <a href="/library/resources" class="bottom-navigation-dropdown-semititle">Ресурсы</a>
+                                        <a href="/library/literature" class="bottom-navigation-dropdown-semititle">Заказ литературы</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/union/index" class="bottom-navigation-dropdown-title">Первичная профсоюзная организации</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/gto" class="bottom-navigation-dropdown-title">ВФСК ГТО</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/project/index" class="bottom-navigation-dropdown-title">Национальные проекты - создание мастерских</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/legal-information" class="bottom-navigation-dropdown-title">Правовая информация</a>
+                                    </div>
+                                </div>
+                                <div class="bottom-navigation-dropdown-column">
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <div class="bottom-navigation-dropdown-title no-link">Безопасность</div>
+                                        <a href="/security/corruption" class="bottom-navigation-dropdown-semititle">Антикоррупционная деятельность</a>
+                                        <a href="/security/policy" class="bottom-navigation-dropdown-semititle">Защита персональных данных</a>
+                                        <a href="/security/terror" class="bottom-navigation-dropdown-semititle">Антитеррористическая и антиэкстремистская деятельность</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/vacancies/index" class="bottom-navigation-dropdown-title">Вакансии</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/bus" class="bottom-navigation-dropdown-title">Расписание движения автобусов</a>
+                                    </div>
+                                    <div class="bottom-navigation-dropdown-block">
+                                        <a href="/about/mass-media-about-us" class="bottom-navigation-dropdown-title">СМИ о колледже</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/site/contacts" class="bottom-navigation-item">
+                        <span class="bottom-navigation-item-text">Контакты</span>
+                    </a>
+                    <div class="bottom-navigation-item desktop-hidden">
+                        <div class="bottom-navigation-item-text js-toggle-dropdown">Дополнительная информация</div>
+                        <div class="bottom-navigation-dropdown js-dropdown">
+	                        <div class="bottom-navigation-dropdown-row">
+	                            <div class="bottom-navigation-dropdown-column">
+	                                <div class="bottom-navigation-dropdown-block">
+	                                    <a href="/education/index" class="bottom-navigation-dropdown-title">Сведения об образовательной организации </a>
+	                                </div>
+	                                <div class="bottom-navigation-dropdown-block">
+	                                    <a href="/site/procurement" class="bottom-navigation-dropdown-title">Закупки</a>
+	                                </div>
+	                                <div class="bottom-navigation-dropdown-block">
+                                        <a href="/noko/index" class="bottom-navigation-dropdown-title">НОКО</a>
+	                                </div>
+	                                <div class="bottom-navigation-dropdown-block">
+                                        <a href="/site/information-about-the-heads-income" class="bottom-navigation-dropdown-title">Сведения о доходах руководителя</a>
+	                                </div>
+	                                <div class="bottom-navigation-dropdown-block">
+	                                    <a href="" class="bottom-navigation-dropdown-title">Дополнительное образование </a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Автошкола</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Школьникам </a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Студентам</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Взрослым</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Предпенсионеры 50+</a>
+	                                </div>
+	                            </div>
+	                            <div class="bottom-navigation-dropdown-column">
+	                                <div class="bottom-navigation-dropdown-block">
+	                                    <a href="" class="bottom-navigation-dropdown-title">Региональный координационный центр</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Документы РКЦ, СЦК, ВСР</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Контакты РКЦ, ВСР, Академия</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Региональные чемпионаты ХМАО-Югры</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Отборочные соревнования </a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Отборочные соревнования на территории ХМАО-Югры</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Национальные чемпионаты</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Демонстрационный экзамен</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Академия ВСР</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Проект «Билет в Будущее»</a>
+	                                </div>
+	                            </div>
+	                            <div class="bottom-navigation-dropdown-column">
+	                                <div class="bottom-navigation-dropdown-block">
+	                                    <a href="/subdivision/index?id=6" class="bottom-navigation-dropdown-title">Многофункциональный центр прикладных квалификаций</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">О нас</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Ресурсы</a>
+	                                    <a href="/site/partners" class="bottom-navigation-dropdown-semititle">Социальное партнерство</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Мероприятия</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Ворлдскиллс</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Услуги</a>
+	                                    <a class="bottom-navigation-dropdown-semititle">Медиа-центр </a>
+	                                </div>
+	                            </div>
+	                            <div class="bottom-navigation-dropdown-column">
+	                                <div class="bottom-navigation-dropdown-block">
+	                                    <a href="" class="bottom-navigation-dropdown-title">Сервисы</a>
+                                                                                                                                                                                        <a href="https://learn.surpk.ru/cab/wc/#/auth" class="bottom-navigation-dropdown-semititle" target="_blank">ЛИЧНЫЙ КАБИНЕТ </a>
+                                                                                                                                                                                                <a href="https://mail.surpk.ru/" class="bottom-navigation-dropdown-semititle" target="_blank">Корпоративная почта</a>
+                                                                                                                                                                                                <a href="https://schedule.surpk.ru/schedule/" class="bottom-navigation-dropdown-semititle" target="_blank">Расписание занятий </a>
+                                                                                                                                                                                                <a href="https://surpk.ru/service/digital-library" class="bottom-navigation-dropdown-semititle" target="_blank">Электронные ресурсы</a>
+                                                                                                                                    	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <div class="bottom-mobile-menu-bottom desktop-hidden">
+						<div class="bottom-mobile-menu-bottom-texts">
+			        		<a href="/site/contacts" class="bottom-mobile-menu-bottom-texts-wrapper">
+	  							<svg class="bottom-mobile-menu-bottom-texts-icon">
+	  								<use xlink:href="/assets/img/sprite.svg#ic-2"></use>
+	  							</svg>
+	  							<div class="bottom-mobile-menu-bottom-texts-text">ул. Маяковского, 41</div>
+	  		        		</a>
+	  		        		<div class="bottom-mobile-menu-bottom-texts-wrapper">
+	  		        			<svg class="bottom-mobile-menu-bottom-texts-icon">
+	  								<use xlink:href="/assets/img/sprite.svg#ic-3"></use>
+	  							</svg>
+	  							<a href="mailto:surpk@surpk.ru" class="bottom-mobile-menu-bottom-texts-text">surpk@surpk.ru</a>
+	  		        		</div>
+	  	        		</div>
+						<div class="top-social">
+		                    <!-- <a class="top-social-icon">
+		                        <svg class="icon fb">
+		                            <use xlink:href="/assets/img/sprite.svg#ic-4"></use>
+		                        </svg>
+		                    </a>
+		                    <a class="top-social-icon">
+		                        <svg class="icon vk">
+		                            <use xlink:href="/assets/img/sprite.svg#ic-5"></use>
+		                        </svg>
+		                    </a> -->
+<!--		                    <a href="http://insagram.com/spk.prof" class="top-social-icon" target="_blank">-->
+<!--		                        <svg class="icon inst">-->
+<!--		                            <use xlink:href="/assets/img/sprite.svg#ic-6"></use>-->
+<!--		                        </svg>-->
+<!--		                    </a>-->
+		                </div>
+                    </div>
+                </div>
+            </nav>
+            <a href="#modal-feedback" class="bottom-old-button bottom-button button button-feedback js-toggle-modal">Задать вопрос</a>
+            <a href="/site/online" class="bottom-button button">Подать документы</a>
+        </div>
+    </div>
+</header>
+
+    <div id="content">
+    {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer mt-0">
+        <div class="footer-top">
+            <div class="content">
+                <div class="footer-top-logo-wrapper">
+                    <svg class="footer-top-logo">
+                        <use xlink:href="/assets/img/sprite.svg#logo"></use>
+                    </svg>
+                </div>
+                <div class="footer-top-contact">
+                    <a href="tel:+73462206940" class="footer-top-contact-link">+7 (3462) 206-940</a>
+                    <a href="mailto:surpk@surpk.ru" class="footer-top-contact-link">surpk@surpk.ru</a>
+                </div>
+                <div class="footer-top-contact address">ХМАО - Югра, г. Сургут, <br> ул. Маяковского, д. 41</div>
+                <div class="footer-top-contact timejob">Пн-пт: с 9:00 до 18:00; <br> Сб: с 9:00 до 13:00. <br> Вс: выходной</div>
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div class="content">
+                <a href="/education/index" class="footer-middle-column-title no-icon mob-only">Сведения об образовательной организации</a>
+                <div class="footer-middle-column">
+                    <div class="footer-middle-column-title js-toggle-dropdown">Студенту</div>
+                    <div class="footer-middle-column-links js-dropdown">
+                        <a href="/advertisement/index" class="footer-middle-column-links-link">Объявления</a>
+                        <a href="/schedule/index" class="footer-middle-column-links-link">Расписание занятий</a>
+                        <a href="/distance/index" class="footer-middle-column-links-link">Обучение с применением дистанционных образовательных технологий</a>
+                        <a href="/site/distance-learning" class="footer-middle-column-links-link">Заочное обучение</a>
+                        <a href="/enrollee/reception" class="footer-middle-column-links-link">Обучение инвалидов и лиц с ОВЗ</a>
+                        <a href="/site/ege" class="footer-middle-column-links-link">ЕГЭ</a>
+                        <a href="/site/gia" class="footer-middle-column-links-link">Государственная итоговая аттестация</a>
+                        <a href="/demo-exam/index" class="footer-middle-column-links-link">Демонстрационный экзамен</a>
+                        <a href="/site/rule" class="footer-middle-column-links-link">Правила внутреннего распорядка для обучающихся колледжа</a>
+                        <a href="/site/preventive" class="footer-middle-column-links-link">Профилактическая работа</a>
+                        <a href="/activity/autonomy" class="footer-middle-column-links-link">Студенческое самоуправление</a>
+                        <a href="/activity/index" class="footer-middle-column-links-link">Внеучебная деятельность</a>
+                        <a href="/enrollee/hostel" class="footer-middle-column-links-link">Общежитие</a>
+                        <a href="/site/med" class="footer-middle-column-links-link">Режим работы медицинского кабинета</a>
+                    </div>
+                </div>
+                <div class="footer-middle-column">
+                    <div class="footer-middle-column-title js-toggle-dropdown">Абитуриенту</div>
+                    <div class="footer-middle-column-links js-dropdown">
+    <!--                    <a href="#" class="footer-middle-column-links-link">Информация для поступающих</a>-->
+                        <a href="/enrollee/index" class="footer-middle-column-links-link">Приёмная комиссия</a>
+                        <a href="/enrollee/specialties" class="footer-middle-column-links-link">Специальности и профессии</a>
+                        <a href="/enrollee/hostel" class="footer-middle-column-links-link">Информация об общежитии</a>
+                        <a href="/enrollee/statement?page_block=announcements_for_applicants" class="footer-middle-column-links-link">Объявления для абитуриентов</a>
+                        <a href="/enrollee/statement?page_block=mode_of_operation_of_the_selection_committee" class="footer-middle-column-links-link">Режим работы приемной комиссии</a>
+                        <a href="/enrollee/statement?page_block=contacts_and_working_hours_of_the_secretariat_of_the_selection_committee_during_the_admissions_campaign_in_2022" class="footer-middle-column-links-link">Контакты и режим работы секретариата приёмной комиссии в период проведения приемной кампании 2022 года</a>
+                        <a href="/site/cours" class="footer-middle-column-links-link">Подготовительные курсы для поступающих</a>
+                        <a href="/enrollee/questions" class="footer-middle-column-links-link">Часто задаваемые вопросы</a>
+                        <a href="/site/price" class="footer-middle-column-links-link">Стоимость образовательных услуг</a>
+                        <a href="/enrollee/statement?page_block=extramural_studies" class="footer-middle-column-links-link"></a>
+                    </div>
+                </div>
+                <div class="footer-middle-column">
+                    <div class="footer-middle-column-title js-toggle-dropdown">О колледже</div>
+                    <div class="footer-middle-column-links js-dropdown">
+                        <a href="/about/history" class="footer-middle-column-links-link">История колледжа</a>
+                        <a href="/education/index" class="footer-middle-column-links-link">Сведения об образовательной организации</a>
+                        <a href="/about/achievements" class="footer-middle-column-links-link">Достижения</a>
+                        <a href="/about/honor" class="footer-middle-column-links-link">Книга почета</a>
+                        <a href="/social-psychological-service/psychological" class="footer-middle-column-links-link">Социально-психологическая служба</a>
+    <!--                    <a href="#" class="footer-middle-column-links-link no-link">Медиа-центр</a>-->
+                        <a href="/methodical/index" class="footer-middle-column-links-link">Методическая служба</a>
+                        <a href="/library/index" class="footer-middle-column-links-link">Библиотека</a>
+                        <a href="/union/index" class="footer-middle-column-links-link">Первичная профсоюзная организации</a>
+                        <a href="/about/gto" class="footer-middle-column-links-link">ВФСК ГТО</a>
+                        <a href="/project/index" class="footer-middle-column-links-link">Национальные проекты - создание мастерских</a>
+                        <a href="/about/legal-information" class="footer-middle-column-links-link">Правовая информация</a>
+    <!--                    <a href="#" class="footer-middle-column-links-link no-link">Безопасность</a>-->
+                        <a href="/vacancies/index" class="footer-middle-column-links-link">Вакансии</a>
+                        <a href="/about/bus" class="footer-middle-column-links-link">Расписание движения автобусов</a>
+                        <a href="/about/mass-media-about-us" class="footer-middle-column-links-link">СМИ о колледже</a>
+                        <a href="/site/site-map" class="footer-middle-column-links-link">Карта сайта</a>
+                    </div>
+                </div>
+                <div class="footer-middle-column">
+                    <div class="footer-middle-column-title js-toggle-dropdown">РКЦ</div>
+                    <div class="footer-middle-column-links js-dropdown">
+                        <a href="/rkc/view?page=regional_championships_of_khmao" class="footer-middle-column-links-link">Региональные чемпионаты ХМАО</a>
+                        <a href="/rkc/view?page=qualifying_competition" class="footer-middle-column-links-link">Отборочные соревнования</a>
+                        <a href="/rkc/view?page=qualifying_competitions_on_the_territory_of_khmao_yugra" class="footer-middle-column-links-link">Отборочные соревнования на территории ХМАО-Югры</a>
+                        <a href="/rkc/view?page=national_championships" class="footer-middle-column-links-link">Национальные чемпионаты</a>
+                        <a href="/rkc/view?page=demo_exam" class="footer-middle-column-links-link">Демонстрационный экзамен</a>
+                        <a href="/rkc/view?page=training_according_to_the_programs_of_the_hrv_academy" class="footer-middle-column-links-link">Обучение по программам Академии ВСР</a>
+                        <a href="/rkc/documents?page=project_ticket_to_the_future" class="footer-middle-column-links-link">Проект «Билет в Будущее» на территории ХМАО-Югры</a>
+                        <a href="/rkc/documents?page=archive_rkc" class="footer-middle-column-links-link">Архив РКЦ</a>
+                    </div>
+                    <div class="footer-middle-column footer-middle-column-inner">
+                        <div class="footer-middle-column-title js-toggle-dropdown">МФЦПК</div>
+                        <div class="footer-middle-column-links js-dropdown">
+                            <a href="/schedule/view?id=6" class="footer-middle-column-links-link">Расписание</a>
+                            <a href="/subdivision/news?id=6" class="footer-middle-column-links-link">Медиа-центр</a>
+                            <a href="/subdivision/events?id=6" class="footer-middle-column-links-link">Мероприятия</a>
+                            <a href="/social-partnership/index" class="footer-middle-column-links-link">Трудоустройство</a>
+                        </div>
+                    </div>
+                </div>
+               <!--  <div class="footer-middle-column">
+                    <div class="footer-middle-column-title js-toggle-dropdown">Родителям</div>
+                    <div class="footer-middle-column-links js-dropdown">
+                        <a href="/" class="footer-middle-column-links-link">Родительское собрание</a>
+                        <a href="/" class="footer-middle-column-links-link">Центр социального пратнерства</a>
+                        <a href="/" class="footer-middle-column-links-link">Центр про образования </a>
+                        <a href="/" class="footer-middle-column-links-link">Обучение лиц с ОВЗ</a>
+                        <a href="/" class="footer-middle-column-links-link">Методические  рекомендации для родителей </a>
+                        <a href="/" class="footer-middle-column-links-link">по обеспечению ограничения контента</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="content">
+                <div class="footer-bottom-copyright">©2023 СПК</div>
+                <div class="footer-bottom-social">
+                    <!-- <a class="footer-bottom-social-icon">
+                        <svg class="icon fb">
+                            <use xlink:href="/assets/img/sprite.svg#ic-4"></use>
+                        </svg>
+                    </a>
+                    <a class="footer-bottom-social-icon">
+                        <svg class="icon vk">
+                            <use xlink:href="/assets/img/sprite.svg#ic-5"></use>
+                        </svg>
+                    </a> -->
+    <!--                <a href="http://insagram.com/spk.prof" class="footer-bottom-social-icon" target="_blank">-->
+    <!--                    <svg class="icon inst">-->
+    <!--                        <use xlink:href="/assets/img/sprite.svg#ic-6"></use>-->
+    <!--                    </svg>-->
+    <!--                </a>-->
+                </div>
+                <div class="footer-bottom-develop">
+                    Разработка сайта - <a href="https://goldcarrot.ru/" target="_blank">Gold Carrot</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Core JS  -->
+    <script src="{{ url_for('static', filename='/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/libs/svg-injector/dist/svg-injector.min.js') }}" async defer></script>
+    <script src="{{ url_for('static', filename='/assets/libs/feather-icons/dist/feather.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/libs/in-view/dist/in-view.min.js') }}" async defer></script>
+    <script src="{{ url_for('static', filename='/assets/libs/sticky-kit/dist/sticky-kit.min.js') }}" async defer></script>
+    <script src="{{ url_for('static', filename='/assets/libs/imagesloaded/imagesloaded.pkgd.min.js') }}" async defer></script>
+    <script src="{{ url_for('static', filename='/assets/libs/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/libs/autosize/dist/autosize.min.js') }}" async defer></script>
+    <!-- Google maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA74mo0V79zPcSWjgUMe9AdmLy3-ruPKLs"></script>
+    <!-- Page JS -->
+    <script src="{{ url_for('static', filename='/assets/libs/flatpickr/dist/flatpickr.min.js') }}"></script>
+    <!-- Quick JS -->
+    <script src="{{ url_for('static', filename='/assets/js/quick-website.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/js/se_scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='/assets/js/se_practice_script.js') }}"></script>
+
+    <!-- Feather Icons -->
+    <script>
+        feather.replace({
+            'width': '1em',
+            'height': '1em'
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "practice/admin/base_practice_admin.html" %}
+
+{% block title %}Работы{% endblock %}
+
+{% block content_practice_admin %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <h5>Работы</h5>
+        </div>
+    </div>
+
+    {% if not list_of_thesises %}
+    <div class="row">
+        <div class="col text-center">
+            <p>Здесь будут отображаться текущие работы по направлению<br>{{ area }}, {{ worktype }}</p>
+        </div>
+    </div>
+    {% else %}
+
+    <form method="POST" action="{{ url_for('index_admin', area_id=area.id, worktype_id=worktype.id) }}">
+        <div class="row mb-3">
+            <div class="col">
+                <input type="submit" class="btn btn-sm btn-primary" name="download_materials_button" value="Загрузить материалы работ">
+            </div>
+        </div>
+    </form>
+
+    {% for thesis in list_of_thesises %}
+    <div class="card border-0 mb-3">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <a href="{{ url_for('thesis_admin', id=thesis.id, area_id=area.id, worktype_id=worktype.id) }}" class="link text-primary">
+                    <strong>{{ thesis.title }}</strong>
+                </a>
+            </h6>
+        </div>
+        <div class="card-body pt-2 pb-3">
+            <p class="text-sm mb-0">Студент: {{ thesis.user.get_name() }}</p>
+            <p class="text-sm mb-0">Научный руководитель: {{ thesis.supervisor }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
